@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="js/bootstrap-3.3.5/css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/AngularJS/angular.min.js"></script>
+    <title>Title</title>
+</head>
+<body ng-app="BookListApp">
+<div ng-controller="MainPageController" class="container">
+    <div class="row">
+        <div class="btn-group col-md-4">
+            <button type="button"
+                    ng-class="{true:'btn btn-default active', false:'btn btn-default inactive'}[tabBtnItem == currentStatusItem]"
+                    ng-repeat="tabBtnItem in StatusItems" ng-click="ClickTabButton(tabBtnItem)">
+                {{tabBtnItem.statusTextShown}}
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="form-inline">
+                <span class="badge">Stars:</span>
+                <select class="form-control" ng-model="currentRankItem"
+                        ng-options="rankItem.rankTextShown for rankItem in RankItems">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="searchKey" placeholder="Input to search">
+                <span class="input-group-addon" ng-click="ClearSearchKey()"><span
+                        class="glyphicon glyphicon-remove"></span></span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-default" ng-click="EditItem(emptyListItem)">New</button>
+        </div>
+    </div>
+    <table class="table table-striped table-responsive">
+        <thread>
+            <div class="row">
+                <th class="col-md-1">id</th>
+                <th class="col-md-1">Name</th>
+                <th class="col-md-1">Status</th>
+                <th class="col-md-2">Rank</th>
+                <th class="col-md-4">Action</th>
+            </div>
+        </thread>
+        <tbody>
+        <tr ng-repeat="listItem in ListItems|filter:ListItemStatusFilter|filter:ListItemRankFilter|filter:{name:searchKey}">
+            <td>{{listItem.id}}</td>
+            <td>{{listItem.name}}</td>
+            <td>{{listItem.innerStatusItem.statusTextShown}}</td>
+            <td>
+                <span dh-starbar ng-model="listItem.rank" editable="false" max-value="5"></span>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-click="EditItem(listItem)">Edit</button>
+                    <button type="button"
+                            ng-show="ShowActions(actionItem)"
+                            class="btn btn-default"
+                            ng-repeat="actionItem in StatusItems|filter:{status:'!'+StatusItems[0].status}"
+                            ng-click="ActionBtnClick(actionItem, listItem)">
+                        {{actionItem.actionTextShown}}
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="DeleteItem(listItem)">Delete</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal modal-fade" id="EditModal" tabindex="-1" role="dialog" data-backdrop="false"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h7 class="modal-title" id="myModalLabel">
+                        Edit
+                    </h7>
+                </div>
+                <div class="modal-body">
+                    <span>Name</span>
+                    <input class="form-control" type="text" ng-model="editingListItem.name">
+                    <span>Status</span>
+                    <!--&lt;!&ndash;<input class="form-control" type="text" ng-model="editingListItem.status">&ndash;&gt;angular.equals(statusBtnItem, editingListItem.innerStatusItem)-->
+                    <div class="btn-group">
+                        <button type="button"
+                                ng-class="{true:'btn btn-default active', false:'btn btn-default inactive'}[statusBtnItem.status==editingListItem.innerStatusItem.status]"
+                                ng-repeat="statusBtnItem in StatusItems|filter:{status:'!'+StatusItems[0].status}" ng-click="SwitchEditingItemStatus(statusBtnItem)">
+                            {{statusBtnItem.statusTextShown}}
+                        </button>
+                    </div>
+                    <span>Rank</span>
+                    <dh-starbar ng-model="editingListItem.rank" max-value="5" editable="true"></dh-starbar>
+                    <!--<input class="form-control" type="text" ng-model="editingListItem.rank">-->
+                    <!--<input class="form-control" type="text" ng-model="editingListItem.statusTextShown">-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="SaveItem()">
+                        Summit
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="ClearEditingItem()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/BookListApp.js"></script>
+<script type="text/javascript" src="components/StarBar.js"></script>
+</html>

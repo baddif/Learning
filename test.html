@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<div ng-app="teststarbarapp">
+    <p ng-controller="teststarbarcontroller">
+        <dh-starbar ng-model="value1" editable="true" max-value="5"></dh-starbar></p>
+        <dh-starbar ng-model="value2" editable="false" max-value="5"></dh-starbar></p>
+        <input type="number" ng-model="value2">
+    </div>
+</body>
+<link rel="stylesheet" href="js/bootstrap-3.3.5/css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/AngularJS/angular.min.js"></script>
+<script type="text/javascript" src="components/StarBar.js"></script>
+<script>
+    angular.module('teststarbarapp', ['StarBar']).controller('teststarbarcontroller', function ($scope) {
+    });
+</script>
+</html>
