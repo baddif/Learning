@@ -5,10 +5,18 @@
     <title></title>
 </head>
 <body>
-<div class="container">
-    <div class="nav navbar-default navbar-fixed-top">
+<div id="main" style="display: none">
+    <div style="background-color:coral;">红色</div>
+    <div style="background-color:lightblue;" id="myBlueDiv">蓝色</div>
+    <div style="background-color:lightgreen;">带有更多内容的绿色 div</div>
+</div>
+
+<div>
+    <div class="container" style="display:block;width: 1000px;margin: 0 auto">
         <div class="row">
-<span class="col-md-10 col-md-push-1">
+            <div class="nav navbar-default navbar-fixed-top">
+
+<span class="col-md-6 text-left">
     <a href="#">菜单</a>
     |
     <a href="#">菜单</a>
@@ -19,19 +27,112 @@
     |
     <a href="#">菜单</a>
 </span>
+        <span class="col-md-6s text-right">
+    <a href="#">旧版</a>
+    |
+    <a href="#">English</a>
+        </span>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10 col-md-push-1">
-                <div class="page-header" style="margin: 0px;">
-                    <img src="image\logo.jpg" class="col-md-3" style="height: 100px; width: auto;margin-left: -15px">
+    </div>
+</div>
+<!--
+<div class="container">
+    <div style="width: 1000px;">
+        <div class="nav navbar-default navbar-fixed-top">
+            <div class="row">
+                <div class="col-md-2"></div>
+<span class="col-md-7 text-left">
+    <a href="#">菜单</a>
+    |
+    <a href="#">菜单</a>
+    |
+    <a href="#">菜单</a>
+    |
+    <a href="#">菜单</a>
+    |
+    <a href="#">菜单</a>
+</span>
+        <span class="col-md-1 text-right">
+    <a href="#">旧版</a>
+    |
+    <a href="#">English</a>
+        </span>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="page-header" style="margin: 0px;">
+                        <img src="image\logo_horde.jpg" class="col-md-3"
+                             style="height: 100px; width: auto;margin-left: -15px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                <span class="headLinkBtn">
+                    按钮一</span><span class="headLinkBtn">
+                    按钮一</span><span class="headLinkBtn">
+                    按钮一</span><span class="headLinkBtn">
+                    按钮一</span><span class="headLinkBtn">
+                    按钮一
+            </span>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="carousel" id="myCarousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="image\1.jpg" style="width:100%">
+                            </div>
+                            <div class="item">
+                                <img src="image\2.jpg" style="width:100%">
+                            </div>
+                            <div class="item">
+                                <img src="image\3.jpg" style="width:100%">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
+-->
+</div>
 <link rel="stylesheet" href="js/bootstrap-3.3.5/css/bootstrap.min.css">
 <script type="text/javascript" src="js/jquery-2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/AngularJS/angular.min.js"></script>
+<style>
+    .headLinkBtn {
+        width: 20%;
+        text-align: center;
+        display: inline-block;
+        border: groove
+    }
+
+    #main {
+        width: 100px;
+        border: 1px solid black;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    #main div {
+        flex: 1;
+    }
+
+    #myBlueDiv {
+        align-self: center;
+    }
+</style>
+<script>
+    $("#myCarousel").carousel('cycle');
+</script>
+</body>
 </html>
